@@ -38,9 +38,9 @@ Once installed, the extension's popup menu will look like this:
 
 ![Wallet Name Resolver Popup Menu](http://i.imgur.com/8KwhpWW.png)
 
-Install on Chrome
--------------------
-If you would like to install the Chrome extension, please visit the Chrome Web Store [here](https://chrome.google.com/webstore/detail/netki-wallet-name-resolve/kjiedjbpjmhpjghalpicoodcpihblgdl).
+Use the Production Release on Chrome
+-------------------------------------
+If you would just like to install the production release of the Chrome extension, please visit the Chrome Web Store [here](https://chrome.google.com/webstore/detail/netki-wallet-name-resolve/kjiedjbpjmhpjghalpicoodcpihblgdl).
 
 
 FAQ
