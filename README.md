@@ -6,13 +6,13 @@ walletname-chrome-extension
 ![Wallet Name Resolver Tile](http://i.imgur.com/WZgER2U.png)
 </center>
 
-Netki’s *Wallet Name Resolver* works with all web based blockchain and bitcoin wallets.  Now you can quickly and easily move money between wallets by using a **Wallet Name** instead of a complicated wallet address.
+Netki’s *Wallet Name Resolver* works with web based wallets supporting bitcoin and numerous other blockchain based digital currencies and assets.  Now you can quickly and easily move money between wallets by using a **Wallet Name** instead of a complicated wallet address.
 
 Why have:
 
 <font color="#dc3333">1CpLXM15vjULK3ZPGUTDMUcGATGR9xGitv</font>
 
-When you can have an *easy to remember* Wallet Name like:
+When you can have an *easy to remember*, *easy to share* Wallet Name like:
 
 <font color="#2dca13">**batman.tip.me**</font>
 
@@ -60,3 +60,9 @@ FAQ
 **Q:** How can I contact Netki?
 
 **A:** Please open an issue directly here in Github or feel free to email us at opensource@netki.com
+
+-----
+
+**Q:** How can I report an Issue with the Chrome extension and a specific website?
+
+**A:** The easiest method is to use the *Report Site Lookup Issue* feature as shown in the screen shot. Feel free to contact us via the other means listed in the FAQ as well. 
