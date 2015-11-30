@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="styles/popup.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <ul>
+      <li><span class="icon lookup"></span><span class="text-top-pad">Lookup</span><span class="beta">BETA</span></li>
+      <li><form name="lookup"><input class="searchInput" type="text" name="lookupText"></form></li>
+      <li id="currencyLi" class="currencyLi hidden">Select Currency<br><select name="currencySelect" id="currencySelect" class="currencySelect"></select></li>
+      <li class="lookupLi" id="lookMeUp">Lookup Wallet Name</li>
+      <li class="lookupLi hidden" id="copyButton">Copy Wallet Address</li>
+      <li id="msgLi"></li>
+      <hr/>
+      <li><span class="icon nowork"></span><a name="notworking">Report Site Lookup Issue</a></li>
+      <li><span class="icon settings"></span><a href="options.html">Settings</a></li>
+      <li><span class="icon netki-logo"></span><a href="https://netki.com" target="_blank">Visit Netki</a></li>
+    </ul>
+    <script src="jquery/jquery-2.1.4.min.js"></script>
+    <script src="scripts/netkiUtils.js"></script>
+    <script src="scripts/popup.js"></script>
+  </body>
+</html>
