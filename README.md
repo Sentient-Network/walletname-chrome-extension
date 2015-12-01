@@ -10,20 +10,25 @@ Netki’s *Wallet Name Resolver* works with web based wallets supporting bitcoin
 
 Why have:
 
-<font color="#dc3333">1CpLXM15vjULK3ZPGUTDMUcGATGR9xGitv</font>
+1CpLXM15vjULK3ZPGUTDMUcGATGR9xGitv
 
 When you can have an *easy to remember*, *easy to share* Wallet Name like:
 
-<font color="#2dca13">**batman.tip.me**</font>
+**batman.tip.me**
 
 You can get a **free** Wallet Name two ways:
 
 1. Contact your wallet provider! We have had Netki Wallet Names installed simply by users asking for this feature. :)
 2. Are you on Twitter? Then you already have a Wallet Name via our partner ChangeTip! Go to [www.tip.me](https://www.tip.me) and sign in with your Twitter handle to activate your wallet and automatically get a Wallet Name that you can readily share.
 
+<a style="padding-left:150px;" href="http://www.twitter.com"><img src="http://i.imgur.com/yMAKB4v.png" width="8%"></a>
+<a style="padding-left:100px;" href="http://www.changetip.com"><img src="http://i.imgur.com/7m0riSa.png"></a>
+
 If you would like your own custom Wallet Name (TonyStark.bit) you can sign up for one at [www.netki.com](https://www.netki.com) for as low as $1.95.
 
-Setup / Development
+<img src="http://i.imgur.com/soX3pYS.gif">
+
+How-to: Setup / Development
 --------------------
 * Clone git repository
 * Run ```npm install``` to install required Node modules
