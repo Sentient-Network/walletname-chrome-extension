@@ -87,7 +87,8 @@ function showAvailableCurrencies(walletName, currencies) {
   // Convert Shortcode to Currency Names -> IF AVAILABLE
   var optStr = "";
   for (var i = 0; i < currencies.length; i++) {
-    var option = $('<option value="' + currencies[i] + '">' + SHORTCODES[currencies[i]] + '</option>');
+    var val = SHORTCODES[currencies[i]] || currencies[i];
+    var option = $('<option value="' + currencies[i] + '">' + val + '</option>');
     optStr += option.prop('outerHTML');
   }
 

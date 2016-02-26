@@ -17,6 +17,6 @@ var SHORTCODES = {
 };
 
 function isWalletName(walletName) {
-  var pattern = /^(?!:\/\/)([a-zA-Z0-9]+\.)?[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{2,24}?$/i;
+  var pattern = /^(?!:\/\/)([a-z0-9_][a-z0-9_-]*\.)?([a-z0-9_][a-z0-9_-]+\.)+[a-zA-Z]{2,24}?$/i;
   return pattern.test(walletName);
 }

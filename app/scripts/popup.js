@@ -115,7 +115,8 @@ function lookupWalletName() {
           // Clear Select if previously used
           cSelect.find("option").remove().end();
           data.available_currencies.forEach(function (value) {
-            cSelect.append("<option value='" + value + "'>" + SHORTCODES[value] + "</option>");
+            var val = SHORTCODES[value] || value;
+            cSelect.append("<option value='" + value + "'>" + val + "</option>");
           });
         } else {
           return resolveWalletName(inputElem.val(), data.available_currencies[0], inputElem);
