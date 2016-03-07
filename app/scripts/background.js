@@ -58,7 +58,7 @@ function getIsSiteException(exceptionUrls) {
   });
 }
 
-function resolveWalletName(walletName, currency, tab, editable) {
+function resolveWalletName(walletName, currency, tab, editable, fromContextMenu) {
   var req = new XMLHttpRequest();
   req.open('GET', NETKI_PUBAPI_HOST + '/api/wallet_lookup/' + walletName + '/' + currency);
   req.onreadystatechange = function () {
@@ -76,7 +76,7 @@ function resolveWalletName(walletName, currency, tab, editable) {
             }
           });
         }
-      } else {
+      } else if (fromContextMenu) {
         chrome.tabs.sendMessage(tab.id, {
           args: {
             type: 'walletNameNotFound',
@@ -89,7 +89,7 @@ function resolveWalletName(walletName, currency, tab, editable) {
   req.send();
 }
 
-function getWalletCurrencies(walletName, tab, editable) {
+function getWalletCurrencies(walletName, tab, editable, fromContextMenu) {
   var req = new XMLHttpRequest();
   req.open('GET', NETKI_PUBAPI_HOST + '/api/wallet_lookup/' + walletName + '/available_currencies');
   req.onreadystatechange = function () {
@@ -107,9 +107,9 @@ function getWalletCurrencies(walletName, tab, editable) {
             }
           });
         } else {
-          resolveWalletName(walletName, data.available_currencies[0], tab, editable);
+          resolveWalletName(walletName, data.available_currencies[0], tab, editable, fromContextMenu);
         }
-      } else {
+      } else if (fromContextMenu) {
         chrome.tabs.sendMessage(tab.id, {
           args: {
             type: 'walletNameNotFound',
@@ -124,7 +124,7 @@ function getWalletCurrencies(walletName, tab, editable) {
 
 function lookupClickHandler(info, tab) {
   if (isWalletName(info.selectionText)) {
-    getWalletCurrencies(info.selectionText, tab, info.editable);
+    getWalletCurrencies(info.selectionText, tab, info.editable, true);
   } else {
     chrome.tabs.sendMessage(tab.id, {
       args: {
@@ -139,8 +139,10 @@ function lookupClickHandler(info, tab) {
 chrome.runtime.onInstalled.addListener(function () {
   var title = 'Lookup Wallet Name';
   var context = 'selection';
-  chrome.contextMenus.create({ 'title': title, 'contexts': [context],
-    'id': 'context' + context });
+  chrome.contextMenus.create({
+    'title': title, 'contexts': [context],
+    'id': 'context' + context
+  });
 });
 
 // Setup onload handler to set the exception flag for the URL
@@ -152,10 +154,10 @@ chrome.webNavigation.onCompleted.addListener(function (details) {
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   switch (message.type) {
     case 'walletNameLookup':
-      return resolveWalletName(message.wn, message.currency, sender.tab, true);
+      return resolveWalletName(message.wn, message.currency, sender.tab, true, false);
     case 'getWalletCurrencies':
       if (!isExceptionUrl && isWalletName(message.lookupValue)) {
-        return getWalletCurrencies(message.lookupValue, sender.tab, true);
+        return getWalletCurrencies(message.lookupValue, sender.tab, true, false);
       }
       return;
   }

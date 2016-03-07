@@ -1,12 +1,11 @@
 'use strict';
 
-var clickedElem = null;
 var popupElem = null;
 
 var inputTypes = ['text', 'search', 'url', 'email'];
 
 var autolookup;
-var autolookupOnMultiple;
+var autolookupOnMultiple = true;
 
 function loadOptions() {
   chrome.storage.sync.get({
@@ -14,19 +13,13 @@ function loadOptions() {
     autolookupOnMultiple: true
   }, function (items) {
     autolookup = items.autolookup;
-    autolookupOnMultiple = items.autolookupOnMultiple;
+    //autolookupOnMultiple = items.autolookupOnMultiple;
   });
 }
 
-document.addEventListener("mousedown", function (event) {
-  if (event.button === 2 && event.target.tagName.toLowerCase() === 'input') {
-    clickedElem = event.target;
-  }
-});
-
 document.addEventListener("blur", function (event) {
   loadOptions();
-  if (autolookup && event.target.tagName.toLowerCase() === 'input' && typeof event.target.attributes['type'] !== 'undefined' && inputTypes.indexOf(event.target.attributes['type'].value) != -1) {
+  if (autolookup && !$.modal.isActive() && event.target.tagName.toLowerCase() === 'input' && typeof event.target.attributes['type'] !== 'undefined' && inputTypes.indexOf(event.target.attributes['type'].value) != -1) {
     chrome.runtime.sendMessage(chrome.runtime.id, { type: 'getWalletCurrencies', lookupValue: event.target.value });
     return true;
   }
@@ -49,22 +42,13 @@ function updateInputWithWalletName(walletName, walletAddress) {
 
   var updatedElem = null;
 
-  // If we already know the element, skip search
-  if (clickedElem != null && clickedElem.tagName.toLowerCase() === 'input') {
-    if (clickedElem.value === walletName) {
-      clickedElem.value = walletAddress;
-      updatedElem = clickedElem;
-    }
-  } else {
-    // If we don't have the element, search for it
-    var elements = document.getElementsByTagName('input');
-    for (var i = 0; i < elements.length; i++) {
-      var element = elements[i];
-      if (element.value === walletName) {
-        element.value = walletAddress;
-        updatedElem = element;
-        break;
-      }
+  var elements = document.getElementsByTagName('input');
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    if (element.value === walletName) {
+      element.value = walletAddress;
+      updatedElem = element;
+      break;
     }
   }
 
@@ -115,10 +99,6 @@ function showAvailableCurrencies(walletName, currencies) {
 }
 
 function showNotFoundMessage(walletName) {
-  if (clickedElem == null) {
-    return;
-  }
-
   var modalHtml = '<div class="nk-currency-popup-modal">';
   modalHtml += '<div class="nk-modal-header nk-failed"><img src="' + chrome.extension.getURL('images/icon-38.png') + '" border="0" style="vertical-align: middle">&nbsp;Wallet Name Lookup Failed</div>';
   modalHtml += '<div class="nk-modal-body">Wallet Name <strong>' + walletName + '</strong> does not exist!</div>';
@@ -127,8 +107,9 @@ function showNotFoundMessage(walletName) {
   errorElem.appendTo('body').modal({ showSpinner: false, zIndex: 99998 });
 }
 
-function lookupWalletName(walletName) {
+function lookupWalletName(walletName, target) {
   $("#netki-currency-popup select").each(function () {
+    if (!$(this).is(':visible')) return;
     if ($(this).attr('name') === 'lookupCurrency') {
       var msg = {
         type: 'walletNameLookup',

@@ -1,7 +1,7 @@
 {
   "name": "Netki Wallet Name Resolver (BETA)",
   "short_name": "WN Resolver Beta",
-  "version": "0.0.46",
+  "version": "0.0.48",
   "manifest_version": 2,
   "description": "Resolve Blockchain / Bitcoin Wallet Names automatically in Chrome",
   "icons": {
